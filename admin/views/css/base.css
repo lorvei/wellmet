@@ -1,0 +1,19 @@
+body {
+    margin: 0;
+}
+#header {
+    background-color: #c194f5;
+    padding: 10px 20px;
+}
+#header h1#sitename{
+    margin: 0;
+}
+#content {
+    padding: 10px 20px;
+    background-color: #ede8be;
+}
+#footer {
+    background-color: #7b0603;
+    color: white;
+    padding: 10px 20px;
+}
