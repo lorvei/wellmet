@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Hoszt: 127.0.0.1
--- Létrehozás ideje: 2015. Feb 11. 11:46
+-- Létrehozás ideje: 2015. Feb 12. 11:40
 -- Szerver verzió: 5.5.27
 -- PHP verzió: 5.4.7
 
@@ -32,7 +32,7 @@ CREATE TABLE IF NOT EXISTS `news` (
   `text` text NOT NULL,
   `date` date NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=3 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=4 ;
 
 --
 -- A tábla adatainak kiíratása `news`
@@ -40,7 +40,8 @@ CREATE TABLE IF NOT EXISTS `news` (
 
 INSERT INTO `news` (`id`, `title`, `text`, `date`) VALUES
 (1, 'valami', 'asdfgjoasvoueoirjg', '2014-11-19'),
-(2, 'valamiasd', 'hkjhnoiuchujhwelkjoöivjdfiougvoefvuojhuirf', '2014-11-19');
+(2, 'valamiasd', 'hkjhnoiuchujhwelkjoöivjdfiougvoefvuojhuirf', '2014-11-19'),
+(3, 'GitHub használata', '<p>A projekt nyomonkövetéséhez és mentéséhez már a github-ot használjuk\r\n\r\n<p>A projekt: <a href="https://github.com/lorvei/wellmet">https://github.com/lorvei/wellmet</a>', '2015-02-12');
 
 -- --------------------------------------------------------
 
@@ -83,8 +84,7 @@ CREATE TABLE IF NOT EXISTS `users` (
 --
 
 INSERT INTO `users` (`id`, `uname`, `upass`) VALUES
-(1, 'asdelina', 'asdelmagad'),
-(2, 'lorvei', 'ahhapersze');
+(2, 'lorvei', 'adfe99bb244e3f0b47ca24d189f102fd');
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
