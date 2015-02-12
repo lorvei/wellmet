@@ -2,7 +2,7 @@
 <html>
     <head>
         <meta charset="UTF-8">
-        <title>Tele - <?php echo $pageTitle; ?></title>
+        <title>Wellmet - <?php echo $pageTitle; ?></title>
         <link rel="stylesheet" type="text/css" href="views/css/base.css">
         <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
         
@@ -18,6 +18,6 @@
     <body>
 
         <div id="header">
-            <h1 id="sitename">Tele</h1>        
+            <h1 id="sitename">Wellmet</h1>        
             <?php include('navigation.php'); ?>
         </div>
