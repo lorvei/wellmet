@@ -21,9 +21,9 @@ switch ($page){
         include('controllers/introductionPage.php');
         include('views/introductionPage.php');
         break;
-    case 'kepgaleria';
-        include('controllers/imageGalleryPage.php');
-        include('views/imageGalleryPage.php');
+    case 'kereses';
+        include('controllers/keresesPage.php');
+        include('views/keresesPage.php');
         break;
     case 'kapcsolat';
         include('controllers/contactPage.php');
