@@ -1,11 +1,12 @@
 <?php
-
 session_start();
-
+require_once '../config.php';
+$db = new mysqli($DB_HOST, $DB_USER, $DB_PASS, $DB_NAME);
+$db->set_charset('utf8');
 // Aktuális lap kiválasztása:
 $page = 'login';
-if(isset($_GET['q'])){
-    if(isset($_SESSION['logged'])) $page = $_GET['q'];
+if (isset($_GET['q'])) {
+	if (isset($_SESSION['logged'])) $page = $_GET['q'];
 
     // Aktuális lap betöltése:
 }switch($page){
@@ -13,7 +14,13 @@ if(isset($_GET['q'])){
         include('controllers/loginPage.php');
         include('views/loginPage.php');
         break;
-    case 'hirek';
+    case 'hirek':
+        include('controllers/newsPage.php');
+        include('views/newsPage.php');
+        break; 
+    case 'felhasznalok':
+        include('controllers/userPage.php');
+        include('views/userPage.php');
         break;
     case 'kijelentkezes';
         unset($_SESSION['logged']);
