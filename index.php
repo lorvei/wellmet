@@ -25,6 +25,10 @@ switch ($page){
         include('controllers/keresesPage.php');
         include('views/keresesPage.php');
         break;
+    case 'regisztracio';
+        include('controllers/registrationPage.php');
+        include('views/registrationPage.php');
+        break;
     case 'kapcsolat';
         include('controllers/contactPage.php');
         include('views/contactPage.php');

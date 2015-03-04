@@ -72,7 +72,7 @@ if (isset($_POST['loginSubmit'])) {
                         <input type="password" name="uPass">
                         <br>
                         <input type="submit" name="loginSubmit">
-                        
+                        <a role="presentration"><a href="?q=regisztracio">Regisztráció</a>
                     </form>
                     <?php endif; ?>
                 </div>
