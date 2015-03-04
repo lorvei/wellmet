@@ -24,7 +24,8 @@ if (isset($_POST['usersSubmit'])) {
 	$userPass = crypt($_POST['upass']);
 	$userRealName = $_POST['name'];
 	$userEmail = $_POST['email'];
-	$userRights = $_POST['rights'];
+	//$userRights = $_POST['rights'];
+        $userRights = 4;    // Alap érték: Felhasználó
 	
 	// db-be írás:
 	$query = "INSERT INTO users (uname, upass, name, email, rights) VALUES ('$userName', '$userPass', '$userRealName', '$userEmail', '$userRights');";
