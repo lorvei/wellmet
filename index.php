@@ -29,6 +29,11 @@ switch ($page){
         include('controllers/contactPage.php');
         include('views/contactPage.php');
         break;
+    case 'kijelentkezes';
+        unset($_SESSION['logged']);
+        include('controllers/frontPage.php');
+        include('views/frontPage.php');
+        break;
     default:
         $pageTitle = "404 error";
         include('views/404Page.php');
