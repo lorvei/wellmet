@@ -19,19 +19,19 @@
             <form name="usersForm" method="post" id="newsForm">
                 <label>Felhasználónév:</label>
                 <br>
-                <input type="text" name="uname" class="shortText">
+                <input type="text" name="uname" class="shortText form-control input-sm">
                 <br>
                 <label>Jelszó:</label>
                 <br>
-                <input type="text" name="upass" class="shortText">
+                <input type="text" name="upass" class="shortText form-control input-sm">
                 <br>
                 <label>Név:</label>
                 <br>
-                <input type="text" name="name" class="shortText">
+                <input type="text" name="name" class="shortText form-control input-sm">
                 <br>
                 <label>Email:</label>
                 <br>
-                <input type="text" name="email" class="shortText">
+                <input type="text" name="email" class="shortText form-control input-sm">
                 <br>
                 <input type="submit" name="usersSubmit">
             </form>

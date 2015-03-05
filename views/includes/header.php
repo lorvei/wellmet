@@ -26,10 +26,13 @@
             $success = true;  //hashed password ellenőrzése
 
         if ($success) {
-            // admin oldalakhoz hozzáférés
+            //oldalakhoz hozzáférés
             $_SESSION['logged'] = true;
+            $_SESSION['uName'] = $uData['uname'];
             $_SESSION['name'] = $uData['name'];
             $_SESSION['rights'] = $uData['rights'];
+            $profil = $db->query("SELECT id FROM profilok WHERE user_id=".$uData['id'])->fetch_assoc();
+            $_SESSION['profil_id'] = $profil['id'];
         }
 
         header("Location: $HOST");

@@ -33,6 +33,10 @@ switch ($page){
         include('controllers/contactPage.php');
         include('views/contactPage.php');
         break;
+    case 'profil';
+        include('controllers/profilPage.php');
+        include('views/profilPage.php');
+        break;
     case 'kijelentkezes';
         unset($_SESSION['logged']);
         include('controllers/frontPage.php');
