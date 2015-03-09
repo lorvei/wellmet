@@ -32,8 +32,14 @@
             $_SESSION['uName'] = $uData['uname'];
             $_SESSION['name'] = $uData['name'];
             $_SESSION['rights'] = $uData['rights'];
+            $_SESSION['eMail'] = $uData['email'];
             $profil = $db->query("SELECT id FROM profilok WHERE user_id=".$uData['id'])->fetch_assoc();
             $_SESSION['profil_id'] = $profil['id'];
+        
+            if ($profil['id']!=NULL) {
+                $profilkepek = $db->query("SELECT filenev FROM profilkepek WHERE profil_id=".$profil['id'])->fetch_assoc();
+                $_SESSION['fileNev'] = $profilkepek['filenev'];
+            }
         }
 
         header("Location: $HOST");

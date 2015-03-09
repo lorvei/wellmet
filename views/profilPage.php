@@ -1,12 +1,13 @@
 <?php include('includes/header.php'); ?>
 
 <div id="content" class="row">
-    <div class="col-md-12">
+    <div class="col-md-2">
         <h2><?php echo $_SESSION['uName']; ?></h2>
-
         <?php if ($_SESSION['profil_id'] == NULL) : ?>
-
+    </div>
+    <div class="col-md-10">
         <p>Neked még nincs profilod létrehozva. Hozzd létre a saját profilodat!</p>
+    
             <form name="usersForm" method="post" id="newsForm">
                 
                 <label>Nem:</label>
@@ -58,21 +59,20 @@
         <?php else : ?>
         
             <form name="usersForm" method="post" id="newsForm">
-                <img src="profilepictures/pp.jpg" width="150">
+                <img src="profilepictures/<?php if($_SESSION['fileNev']==NULL){
+                    echo 'pp.jpg" width="150"'; 
+                }else {
+                    echo $_SESSION['fileNev'].'" width="150"';
+                }
+                ?> ">
+    </div>  
+    <div id="data" class="col-md-10">
                 <br>
-                <label>nyet:</label>
-                <br>
-                <input type="text" name="uname" class="shortText">
-                <br>
-                <label>Jelszó:</label>
-                <br>
-                <input type="text" name="upass" class="shortText">
-                <br>
-                <label>Név:</label>
-                <br>
-                <input type="text" name="name" class="shortText">
+                <h2>Adatok</h2>
                 <br>
                 <label>Email:</label>
+                <br>
+                <?php echo $_SESSION['eMail']; ?>
                 <br>
                 <input type="text" name="email" class="shortText">
                 <br>
