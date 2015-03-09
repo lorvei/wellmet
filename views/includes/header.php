@@ -28,6 +28,7 @@
         if ($success) {
             //oldalakhoz hozzáférés
             $_SESSION['logged'] = true;
+            $_SESSION['user_id'] = $uData['id'];
             $_SESSION['uName'] = $uData['uname'];
             $_SESSION['name'] = $uData['name'];
             $_SESSION['rights'] = $uData['rights'];
