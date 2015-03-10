@@ -33,9 +33,13 @@
             $_SESSION['name'] = $uData['name'];
             $_SESSION['rights'] = $uData['rights'];
             $_SESSION['eMail'] = $uData['email'];
+            $profil = $db->query("SELECT szuletesi_datum FROM profilok WHERE user_id=".$uData['id'])->fetch_assoc();
+            $_SESSION['szuletesiDatum'] = $profil['szuletesi_datum'];
             $profil = $db->query("SELECT id FROM profilok WHERE user_id=".$uData['id'])->fetch_assoc();
             $_SESSION['profil_id'] = $profil['id'];
-        
+            $profil = $db->query("SELECT bemutatkozas FROM profilok WHERE user_id=".$uData['id'])->fetch_assoc();
+            $_SESSION['bemutatkozas'] = $profil['bemutatkozas'];
+            
             if ($profil['id']!=NULL) {
                 $profilkepek = $db->query("SELECT filenev FROM profilkepek WHERE profil_id=".$profil['id'])->fetch_assoc();
                 $_SESSION['fileNev'] = $profilkepek['filenev'];

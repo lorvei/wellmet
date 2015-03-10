@@ -1,7 +1,7 @@
 <?php include('includes/header.php'); ?>
 
 <div id="content" class="row">
-    <div class="col-md-12">
+    <div class="col-md-4">
         <h2>Regisztráció</h2>
 
         <?php if (isset($_SESSION['msg'])) : ?>
@@ -19,28 +19,29 @@
             <form name="usersForm" method="post" id="newsForm">
                 <label>Felhasználónév:</label>
                 <br>
-                <input type="text" name="uname" class="shortText form-control input-sm">
+                <input type="text" name="uname" class="form-control input-sm">
                 <br>
                 <label>Jelszó:</label>
                 <br>
-                <input type="text" name="upass" class="shortText form-control input-sm">
+                <input type="text" name="upass" class="form-control input-sm">
                 <br>
                 <label>Név:</label>
                 <br>
-                <input type="text" name="name" class="shortText form-control input-sm">
+                <input type="text" name="name" class="form-control input-sm">
                 <br>
                 <label>Email:</label>
                 <br>
-                <input type="text" name="email" class="shortText form-control input-sm">
+                <input type="text" name="email" class="form-control  input-sm">
                 <br>
-                <input type="submit" name="usersSubmit">
+                <input type="submit" name="usersSubmit" value="Regisztrálok" class="btn btn-default btn-sm">
             </form>
 
 
 
 
 <?php endif; ?>
-
+    </div>
+    <div class="col-md-8">
     </div>
 </div>
 <?php

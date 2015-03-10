@@ -73,9 +73,15 @@
                 <label>Email:</label>
                 <br>
                 <?php echo $_SESSION['eMail']; ?>
+                <br><br>
+                <label>Életkor:</label>
                 <br>
-                <input type="text" name="email" class="shortText">
+                <?php echo (date('Y')-explode('-',$_SESSION['szuletesiDatum'])[0]). " év"; ?>
+                <br><br>
+                <label>Bemutatkozás:</label>
                 <br>
+                <?php echo $_SESSION['bemutatkozas']; ?>
+                <br><br>
                 <input type="submit" name="profilDelete" value="Profil törlése" class="btn btn-default btn-sm">
             </form>
 

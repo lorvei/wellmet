@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Hoszt: 127.0.0.1
--- Létrehozás ideje: 2015. Feb 25. 11:28
+-- Létrehozás ideje: 2015. Már 10. 11:33
 -- Szerver verzió: 5.5.27
 -- PHP verzió: 5.4.7
 
@@ -32,17 +32,21 @@ CREATE TABLE IF NOT EXISTS `news` (
   `title` varchar(60) NOT NULL,
   `text` text NOT NULL,
   `date` date NOT NULL,
+  `tag` tinyint(4) NOT NULL,
+  `published` tinyint(1) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=4 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=6 ;
 
 --
 -- A tábla adatainak kiíratása `news`
 --
 
-INSERT INTO `news` (`id`, `lead`, `title`, `text`, `date`) VALUES
-(1, '', 'valami', 'asdfgjoasvoueoirjg', '2014-11-19'),
-(2, '', 'valamiasd', 'hkjhnoiuchujhwelkjoöivjdfiougvoefvuojhuirf', '2014-11-19'),
-(3, '', 'GitHub használata', '<p>A projekt nyomonkövetéséhez és mentéséhez már a github-ot használjuk\r\n\r\n<p>A projekt: <a href="https://github.com/lorvei/wellmet">https://github.com/lorvei/wellmet</a>', '2015-02-12');
+INSERT INTO `news` (`id`, `lead`, `title`, `text`, `date`, `tag`, `published`) VALUES
+(1, '', 'valami', 'asdfgjoasvoueoirjg', '2014-11-19', 2, 1),
+(2, '', 'valamiasd', 'hkjhnoiuchujhwelkjoöivjdfiougvoefvuojhuirf', '2014-11-19', 2, 0),
+(3, '', 'GitHub használata', '<p>A projekt nyomonkövetéséhez és mentéséhez már a github-ot használjuk\r\n\r\n<p>A projekt: <a href="https://github.com/lorvei/wellmet">https://github.com/lorvei/wellmet</a>', '2015-02-12', 1, 1),
+(4, 'Eltűnt', 'Tesztalany', 'Megtalálták', '2015-03-04', 3, 1),
+(5, 'Valóban létezik!', 'Létező', 'Nem megjelenítendő szöveg! (csak vicc)', '2015-03-04', 4, 0);
 
 -- --------------------------------------------------------
 
@@ -79,8 +83,16 @@ CREATE TABLE IF NOT EXISTS `profilkepek` (
   `filenev` varchar(100) NOT NULL,
   `leiras` text NOT NULL,
   PRIMARY KEY (`id`),
-  KEY `profil_id` (`profil_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
+  KEY `profil_id` (`profil_id`),
+  KEY `profil_id_2` (`profil_id`)
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=2 ;
+
+--
+-- A tábla adatainak kiíratása `profilkepek`
+--
+
+INSERT INTO `profilkepek` (`id`, `profil_id`, `filenev`, `leiras`) VALUES
+(1, 7, 'pp.jpg', 'van');
 
 -- --------------------------------------------------------
 
@@ -91,13 +103,69 @@ CREATE TABLE IF NOT EXISTS `profilkepek` (
 CREATE TABLE IF NOT EXISTS `profilok` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `user_id` int(11) NOT NULL,
-  `születesi_datum` date NOT NULL,
-  `nem` varchar(1) NOT NULL,
+  `szuletesi_datum` date NOT NULL,
+  `nem` varchar(5) NOT NULL,
   `registracio_datum` date NOT NULL,
   `bemutatkozas` text NOT NULL,
   PRIMARY KEY (`id`),
-  KEY `user_id` (`user_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
+  KEY `user_id` (`user_id`),
+  KEY `user_id_2` (`user_id`),
+  KEY `nem_id` (`nem`),
+  KEY `user_id_3` (`user_id`)
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=10 ;
+
+--
+-- A tábla adatainak kiíratása `profilok`
+--
+
+INSERT INTO `profilok` (`id`, `user_id`, `szuletesi_datum`, `nem`, `registracio_datum`, `bemutatkozas`) VALUES
+(7, 11, '1992-05-12', 'Nő', '2015-03-09', 'sdffsadfcsvrev'),
+(9, 2, '1992-04-08', 'Férfi', '2015-03-10', 'ngdgffssdcsdvsfdvfvdfv');
+
+-- --------------------------------------------------------
+
+--
+-- Tábla szerkezet ehhez a táblához `rights`
+--
+
+CREATE TABLE IF NOT EXISTS `rights` (
+  `id` tinyint(4) NOT NULL,
+  `description` varchar(50) NOT NULL,
+  PRIMARY KEY (`id`),
+  KEY `id` (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- A tábla adatainak kiíratása `rights`
+--
+
+INSERT INTO `rights` (`id`, `description`) VALUES
+(1, 'Adminisztrátor'),
+(2, 'Főszerkesztő'),
+(3, 'Hírszerkesztő'),
+(4, 'Felhasználó');
+
+-- --------------------------------------------------------
+
+--
+-- Tábla szerkezet ehhez a táblához `tags`
+--
+
+CREATE TABLE IF NOT EXISTS `tags` (
+  `id` tinyint(4) NOT NULL,
+  `description` varchar(50) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- A tábla adatainak kiíratása `tags`
+--
+
+INSERT INTO `tags` (`id`, `description`) VALUES
+(1, 'Tudomány'),
+(2, 'IT/Tech'),
+(3, 'Film'),
+(4, 'Játék');
 
 -- --------------------------------------------------------
 
@@ -110,18 +178,23 @@ CREATE TABLE IF NOT EXISTS `users` (
   `uname` varchar(25) NOT NULL,
   `upass` varchar(50) NOT NULL,
   `email` varchar(50) NOT NULL,
+  `name` varchar(50) NOT NULL,
+  `rights` tinyint(4) NOT NULL,
   PRIMARY KEY (`id`),
-  UNIQUE KEY `email` (`email`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=10 ;
+  UNIQUE KEY `email` (`email`),
+  KEY `rights` (`rights`),
+  KEY `rights_2` (`rights`)
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=13 ;
 
 --
 -- A tábla adatainak kiíratása `users`
 --
 
-INSERT INTO `users` (`id`, `uname`, `upass`, `email`) VALUES
-(2, 'lorvei', 'adfe99bb244e3f0b47ca24d189f102fd', ''),
-(4, 'diak', '827ccb0eea8a706c4c34a16891f84e7b', 'kovi258@freemail.hu'),
-(9, 'asd', '7815696ecbf1c96e6894b779456d330e', 'asd@asd.asd');
+INSERT INTO `users` (`id`, `uname`, `upass`, `email`, `name`, `rights`) VALUES
+(2, 'lorvei', '$1$W52.nZ/.$2EfLwiwr1FsFttrRSD/OU0', 'kovacs.m94@gmail.com', 'Kovács Márk', 1),
+(10, 'kesespista', '$1$W52.nZ/.$2EfLwiwr1FsFttrRSD/OU0', 'kanyarpista@gmail.com', 'Kanyar István', 3),
+(11, 'asd', '$1$1g2..e..$uKbSd/YXK3Ru6isz9h9xK.', 'asd@asd.asd', 'Asdelina', 2),
+(12, 'teki', '$1$Xf5.Un0.$ramEyiHi.RmvadfmDL4Rt.', 'tekki@freemail.hu', 'Teknős Alex', 4);
 
 -- --------------------------------------------------------
 
@@ -136,8 +209,33 @@ CREATE TABLE IF NOT EXISTS `uzenetek` (
   `mikor` datetime NOT NULL,
   `szoveg` text NOT NULL,
   PRIMARY KEY (`id`),
-  KEY `felado_id` (`felado_id`,`cimzett_id`)
+  KEY `felado_id` (`felado_id`,`cimzett_id`),
+  KEY `felado_id_2` (`felado_id`),
+  KEY `cimzett_id` (`cimzett_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
+
+--
+-- Megkötések a kiírt táblákhoz
+--
+
+--
+-- Megkötések a táblához `profilkepek`
+--
+ALTER TABLE `profilkepek`
+  ADD CONSTRAINT `profilkepek_ibfk_1` FOREIGN KEY (`profil_id`) REFERENCES `profilok` (`id`);
+
+--
+-- Megkötések a táblához `profilok`
+--
+ALTER TABLE `profilok`
+  ADD CONSTRAINT `profilok_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`);
+
+--
+-- Megkötések a táblához `uzenetek`
+--
+ALTER TABLE `uzenetek`
+  ADD CONSTRAINT `uzenetek_ibfk_1` FOREIGN KEY (`felado_id`) REFERENCES `profilok` (`id`),
+  ADD CONSTRAINT `uzenetek_ibfk_2` FOREIGN KEY (`cimzett_id`) REFERENCES `profilok` (`id`);
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
