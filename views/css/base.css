@@ -51,6 +51,9 @@ body {
 #login-block {
     text-align: right;
 }
-#data{
+#data {
     text-align: right;
+}
+#t1 {
+    padding: 10px;
 }

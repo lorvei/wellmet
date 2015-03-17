@@ -38,7 +38,7 @@ switch ($page){
         include('views/profilPage.php');
         break;
     case 'kijelentkezes';
-        unset($_SESSION['logged']);
+        session_unset();
         include('controllers/frontPage.php');
         include('views/frontPage.php');
         break;

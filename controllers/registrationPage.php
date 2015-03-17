@@ -26,9 +26,11 @@ if (isset($_POST['usersSubmit'])) {
 	$userEmail = $_POST['email'];
 	//$userRights = $_POST['rights'];
         $userRights = 4;    // Alap érték: Felhasználó
-	
+	$userActive = 1;    //Alap érték: Aktív
+        
 	// db-be írás:
-	$query = "INSERT INTO users (uname, upass, name, email, rights) VALUES ('$userName', '$userPass', '$userRealName', '$userEmail', '$userRights');";
+	$query = "INSERT INTO users (uname, upass, name, email, rights, active) VALUES "
+                . "('$userName', '$userPass', '$userRealName', '$userEmail', '$userRights', '$userActive');";
 	$result = $db->query($query);
 	if ($db->errno) {
 		die($db->error);
