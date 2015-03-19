@@ -1,5 +1,19 @@
 <?php
 
+function filename_only($name) {
+    $parts = explode('.', $name);
+    $filename = $parts[0];
+    for ($i = 1; $i < count($parts) - 1; $i++) {
+        $filename .= '.' . $parts[$i];
+    }
+    return $filename;
+}
+
+function extension_only($name) {
+    $parts = explode('.', $name);
+    return $parts[count($parts) - 1];
+}
+
 $pageTitle = "Profil";
 
 //jogosultságok kigyűjtése:
@@ -9,6 +23,12 @@ if ($db->errno) {
     die($db->error);
 }
 
+// Profilképek:
+$query = "SELECT * FROM `profilkepek` WHERE profil_id=" . $_SESSION['profil_id'];
+$profilkepek = $db->query($query);
+if ($db->errno) {
+    die($db->error);
+}
 
 
 $rights = array();
@@ -19,6 +39,34 @@ while ($uData = $result->fetch_array()) {
     $c++;
 }
 
+// feltöltés form feldolgozása:
+if (isset($_POST['uploadSubmit'])) {
+
+    $target = "profilepictures/"; //célmappa
+    $timeNow = time();
+    //var_dump($_FILES); die();
+    $file_name = filename_only($_FILES['upload']['name']) . '-' . $timeNow . '.' . extension_only($_FILES['upload']['name']);
+    $tmp_dir = $_FILES['upload']['tmp_name']; //az ideiglenes mappa helyét a $tmp_dir változóban tároljuk
+
+
+    if (!preg_match('/(jpg|png)$/i', $file_name)) { //csak jpg és png fájlt fogadunk el
+        $_SESSION['mesg'] = "Rossz fájltípus!";
+    } else {
+        move_uploaded_file($tmp_dir, $target . $file_name); //az ideiglenes mappából átteszi a fájlt a végleges mappába
+        $_SESSION['mesg'] = "Fájl feltöltve.";
+
+        $profId = $_SESSION['profil_id'];
+        $kepLeir = 'leiras';
+
+        $query = "INSERT INTO profilkepek (profil_id, filenev, leiras) VALUES "
+                . "($profId, '$file_name', '$kepLeir')";
+
+        $db->query($query);
+        if ($db->errno) {
+            die($db->error);
+        }
+    }
+}
 
 // users form feldolgozása:
 if (isset($_POST['profilokSubmit'])) {
@@ -34,44 +82,50 @@ if (isset($_POST['profilokSubmit'])) {
     $_SESSION['bemutatkozas'] = $profilBemutatkozas;
     $eKor = '';
     if (isset($_POST['eKFut'])) {
-        if ($eKor != '') $eKor .= ', ';
+        if ($eKor != '')
+            $eKor .= ', ';
         $eKor .= 'futás';
     }
     if (isset($_POST['eKAuto'])) {
-        if ($eKor != '') $eKor .= ', ';
+        if ($eKor != '')
+            $eKor .= ', ';
         $eKor .= 'autók';
     }
     if (isset($_POST['eKPc'])) {
-        if ($eKor != '') $eKor .= ', ';
+        if ($eKor != '')
+            $eKor .= ', ';
         $eKor .= 'PC';
     }
     if (isset($_POST['eKSport'])) {
-        if ($eKor != '') $eKor .= ', ';
+        if ($eKor != '')
+            $eKor .= ', ';
         $eKor .= 'sport';
     }
     if (isset($_POST['eKPolitika'])) {
-        if ($eKor != '') $eKor .= ', ';
+        if ($eKor != '')
+            $eKor .= ', ';
         $eKor .= 'politika';
     }
     if (isset($_POST['eKIvaszat'])) {
-        if ($eKor != '') $eKor .= ', ';
+        if ($eKor != '')
+            $eKor .= ', ';
         $eKor .= 'ivászat';
     }
     if (isset($_POST['eKAnime'])) {
-        if ($eKor != '') $eKor .= ', ';
+        if ($eKor != '')
+            $eKor .= ', ';
         $eKor .= 'animék';
     }
     if (isset($_POST['eKZene'])) {
-        if ($eKor != '') $eKor .= ', ';
+        if ($eKor != '')
+            $eKor .= ', ';
         $eKor .= 'zenék';
     }
     // ...
-    
-    
-    
     // db-be írás:
     $query = "INSERT INTO profilok (user_id, nem, szuletesi_datum, registracio_datum, megye, bemutatkozas, erdeklodesi_kor) VALUES "
             . "('$userID', '$nem', '$szuletesiDatum', '$registracioDatum','$profilMegye', '$profilBemutatkozas', '$eKor');";
+
 
 
     $result = $db->query($query);
@@ -105,5 +159,4 @@ if (isset($_POST['profilDelete'])) {
     header("Location: $HOST/?q=profil");
     exit;
 }
-
 ?>

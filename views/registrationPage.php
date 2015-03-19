@@ -23,7 +23,7 @@
                 <br>
                 <label>Jelszó:</label>
                 <br>
-                <input type="text" name="upass" class="form-control input-sm">
+                <input type="password" name="upass" class="form-control input-sm">
                 <br>
                 <label>Név:</label>
                 <br>

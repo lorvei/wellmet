@@ -4,11 +4,11 @@
     <div class="col-md-2">
         <h2><?php echo $_SESSION['uName']; ?></h2>
         <?php if ($_SESSION['profil_id'] == NULL) : ?>
-    </div>
-    <div class="col-md-10">
-        <p>Neked még nincs profilod létrehozva. Hozzd létre a saját profilodat!</p>
-        
-        
+        </div>
+        <div class="col-md-10">
+            <p>Neked még nincs profilod létrehozva. Hozzd létre a saját profilodat!</p>
+
+
             <form name="usersForm" method="post" id="newsForm">
                 <br>
                 <label>Nem:</label>
@@ -22,9 +22,9 @@
                 <label>Születés dátuma:</label>
                 <br>
                 <select name="ev">
-                    <?php 
-                    for ($i=date('Y')-18; $i>=1920; $i--) { 
-                        echo '<option value="'.$i.'">'.$i.'</option>';
+                    <?php
+                    for ($i = date('Y') - 18; $i >= 1920; $i--) {
+                        echo '<option value="' . $i . '">' . $i . '</option>';
                     }
                     ?>
                 </select>
@@ -43,9 +43,9 @@
                     <option value="12">December</option>
                 </select>    
                 <select name="nap">
-                    <?php 
-                    for ($i=01; $i<=31; $i++) { 
-                        echo '<option value="'.$i.'">'.$i.'</option>';
+                    <?php
+                    for ($i = 01; $i <= 31; $i++) {
+                        echo '<option value="' . $i . '">' . $i . '</option>';
                     }
                     ?>
                 </select>
@@ -72,7 +72,7 @@
                     <option value="Vas">Vas</option>
                     <option value="Veszprém">Veszprém</option>
                     <option value="Zala">Zala</option>
-                    
+
                 </select>    
                 <br><br>
                 <label>Bemutatkozás:</label>
@@ -81,80 +81,109 @@
                 <br><br>
                 <label>Érdeklődési körök:</label>
                 <br>
-                
+
                 <table>
                     <tr>
                         <td id="t1"><input type="checkbox" name="eKFut" value="Futás"> Futás   <br>
-                        <input type="checkbox" name="eKAuto" value="Autók"> Autók   <br>
-                        <input type="checkbox" name="eKPc" value="PC"> PC   <br>
-                        <input type="checkbox" name="eKSport" value="Sport"> Sport   <br></td>
+                            <input type="checkbox" name="eKAuto" value="Autók"> Autók   <br>
+                            <input type="checkbox" name="eKPc" value="PC"> PC   <br>
+                            <input type="checkbox" name="eKSport" value="Sport"> Sport   <br></td>
                         <td id="t2"><input type="checkbox" name="eKPolitika" value="Politika"> Politika<br>
-                        <input type="checkbox" name="eKIvaszat" value="Ivászat"> Ivászat<br>
-                        <input type="checkbox" name="eKAnime" value="Animék"> Animék<br>
-                        <input type="checkbox" name="eKZene" value="Zenék"> Zenék<br></td>
+                            <input type="checkbox" name="eKIvaszat" value="Ivászat"> Ivászat<br>
+                            <input type="checkbox" name="eKAnime" value="Animék"> Animék<br>
+                            <input type="checkbox" name="eKZene" value="Zenék"> Zenék<br></td>
                     </tr>
                 </table>    
-                
+
                 <br>
                 <input type="submit" value="Profil létrehozása" class="btn btn-default btn-sm" name="profilokSubmit">
             </form>
 
         <?php else : ?>
-        
-            <form name="usersForm" method="post" id="newsForm">
-                <img src="profilepictures/<?php 
-                    if($_SESSION['fileNev']==NULL){
-                        if($_SESSION['nem']=='Nő'){
-                            echo 'ppf.jpg" width="150"';
-                        }else {
-                            echo 'ppm.jpg" width="150"';
-                        }                    
-                    }else {
-                        echo $_SESSION['fileNev'].'" width="150"';
-                    }
-                    ?> ">
-    </div>  
-    <div id="data" class="col-md-10">
-                <br>
-                <h2>Adatok</h2>
-                <br>
-                <label>Email:</label>
-                <br>
-                <?php echo $_SESSION['eMail']; ?>
-                <br><br>
-                <label>Életkor:</label>
-                <br>
-                <?php echo (date('Y')-explode('-',$_SESSION['szuletesiDatum'])[0]). " év"; ?>
-                <br><br>
-                <label>Nem:</label>
-                <br>
-                <?php echo $_SESSION['nem']; ?>
-                <br><br>
-                <label>Megye:</label>
-                <br>
-                <?php echo $_SESSION['megye']; ?>
-                
-                <?php if ($_SESSION['eKor']!=NULL) : ;?>
-                    <br><br>
-                    <label>Érdeklődési körök:</label>
-                    <br>
-                    <?php echo $_SESSION['eKor']; ?>
-                <?php else : ?>
-                <?php endif; ?>
-                    
-                <br><br>   
-                <label>Bemutatkozás:</label>
-                <br>
-                <?php echo $_SESSION['bemutatkozas']; ?>
-                
-                <br><br>
-                <input type="submit" name="profilDelete" value="Profil törlése" class="btn btn-default btn-sm">
-            </form>
-            
-            
-            
 
-        <?php endif; ?>
+            <form name="usersForm" method="post" id="newsForm">
+                <?php
+                $volt_kep = false;
+                while ($kep = $profilkepek->fetch_assoc()) {
+                    $volt_kep = true;
+                    echo '<img src="profilepictures/' . $kep['filenev'] . '" width="150">';
+                }
+                if (!$volt_kep) {
+                    if ($_SESSION['nem'] == 'Nő') {
+                        echo '<img src="profilepictures/ppf.jpg" width="150">';
+                    } else {
+                        echo '<img src="profilepictures/ppm.jpg" width="150">';
+                    }
+                }
+                ?>
+            </form>
+
+            <?php if (isset($_SESSION['mesg'])) : ?>
+
+                <p><?php echo $_SESSION['mesg'];
+        unset($_SESSION['mesg']); ?></p>
+
+                <br>
+                <ul id="navigation" class="nav nav-pills">
+                    <li role="presentation"><a href="?q=profil">Új feltöltés</a></li>
+                </ul>
+
+    <?php else : ?>
+
+
+
+                <form enctype="multipart/form-data" method="post">
+                    <input type="hidden" name="MAX_FILE_SIZE" value="3000000"> <!-- a feltöltött file maximális mérete 3MB -->
+                    <label>Válassz egy fájlt!</label>
+                    <br>
+                    <input type="file" name="upload">
+                    <input type="submit" name="uploadSubmit" value="Feltöltés">
+                </form>
+
+    <?php endif; ?>
+
+        </div>  
+        <div id="data" class="col-md-10">
+            <br>
+            <h2>Adatok</h2>
+            <br>
+            <label>Email:</label>
+            <br>
+    <?php echo $_SESSION['eMail']; ?>
+            <br><br>
+            <label>Életkor:</label>
+            <br>
+    <?php echo (date('Y') - explode('-', $_SESSION['szuletesiDatum'])[0]) . " év"; ?>
+            <br><br>
+            <label>Nem:</label>
+            <br>
+    <?php echo $_SESSION['nem']; ?>
+            <br><br>
+            <label>Megye:</label>
+            <br>
+            <?php echo $_SESSION['megye']; ?>
+
+    <?php if ($_SESSION['eKor'] != NULL) :; ?>
+                <br><br>
+                <label>Érdeklődési körök:</label>
+                <br>
+                <?php echo $_SESSION['eKor']; ?>
+            <?php else : ?>
+    <?php endif; ?>
+
+            <br><br>   
+            <label>Bemutatkozás:</label>
+            <br>
+    <?php echo $_SESSION['bemutatkozas']; ?>
+
+            <br><br>
+            <input type="submit" name="profilDelete" value="Profil törlése" class="btn btn-default btn-sm">
+            </form>
+
+
+
+
+<?php endif; ?>
 
     </div>
 </div>

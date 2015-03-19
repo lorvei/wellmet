@@ -4,12 +4,16 @@
     <div class="col-md-12">
         <h2><?php echo $pageTitle; ?></h2>
 
+        <?php if (isset($_SESSION['logged'])) : ?>
+        
         <?php if (isset($_SESSION['sresult'])) : ?>
             <ul id="navigation" class="nav nav-pills">
                 <li role="presentation"><a href="?q=kereses">Új keresés</a></li>
             </ul>
             <br>
-
+            
+            
+            
             <?php
             if (!empty($_SESSION['sresult'])) {
                 foreach ($_SESSION['sresult'] as $item) {
@@ -142,8 +146,39 @@
                 }
                 ?>
             </div>
+            
+        <?php endif; ?>
+        <?php else : ?>
+        <div class="row profilok">
+        <?php
+            foreach ($talal as $item) {
+                if ($item['profilkep'] == NULL) {
+                    if ($item['nem'] == 'Nő') {
+                        $profK = 'ppf.jpg" width="150" heigth="150"';
+                    } else {
+                        $profK = 'ppm.jpg" width="150" heigth="150"';
+                    }
+                } else {
+                    $profK = $item['profilkep']['filenev'] . '" width="150" heigth="150"';
+                }
 
-<?php endif; ?>
+                echo '<div class="col-md-4">';
+
+                echo '<br><div class="row">';
+                echo '<div class="col-md-5">';
+                echo '<img src="profilepictures/' . $profK . '">';
+                echo '</div>';
+                echo '<div class="col-md-7">';
+                echo '<b>Felhasználó:</b><div class="uname">' . $item['uname'] . '</div>';
+                echo '<b>Megye:</b><div class="megye">' . $item['megye'] . '</div>';
+                echo '<b>Érdeklődési körök:</b><div class="erdeklodesi_kor">' . $item['erdeklodesi_kor'] . '</div>';
+                echo '</div></div>';
+
+                echo '</div>';
+            }
+            ?>
+        </div>
+        <?php endif; ?>
     </div>
 </div>
 <?php
