@@ -36,7 +36,7 @@ if (isset($_POST['usersSubmit'])) {
 		die($db->error);
 	}
 	
-	$_SESSION['msg'] = 'Felhasználó rögzítve.';
+	$_SESSION['msg'] = 'Sikeres regisztráció.';
 		
 	header("Location: $HOST/?q=regisztracio");
 	exit;

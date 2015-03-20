@@ -10,9 +10,7 @@
                 print($_SESSION['msg']);
                 unset($_SESSION['msg']);
                 ?></p>
-            <ul id="navigation" class="nav nav-pills">
-                <li role="presentation">Sikeres regisztráció!</li>
-            </ul>
+            
 
 <?php else : ?>
             

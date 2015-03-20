@@ -73,7 +73,7 @@
                     <option value="Veszprém">Veszprém</option>
                     <option value="Zala">Zala</option>
 
-                </select>    
+                </select>
                 <br><br>
                 <label>Bemutatkozás:</label>
                 <br>
@@ -93,7 +93,7 @@
                             <input type="checkbox" name="eKAnime" value="Animék"> Animék<br>
                             <input type="checkbox" name="eKZene" value="Zenék"> Zenék<br></td>
                     </tr>
-                </table>    
+                </table>
 
                 <br>
                 <input type="submit" value="Profil létrehozása" class="btn btn-default btn-sm" name="profilokSubmit">
@@ -141,7 +141,7 @@
                 </form>
 
     <?php endif; ?>
-
+                
         </div>  
         <div id="data" class="col-md-10">
             <br>
@@ -177,6 +177,7 @@
     <?php echo $_SESSION['bemutatkozas']; ?>
 
             <br><br>
+            <form name="del" method="post" id="delete">
             <input type="submit" name="profilDelete" value="Profil törlése" class="btn btn-default btn-sm">
             </form>
 

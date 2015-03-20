@@ -23,13 +23,6 @@ if ($db->errno) {
     die($db->error);
 }
 
-// Profilképek:
-$query = "SELECT * FROM `profilkepek` WHERE profil_id=" . $_SESSION['profil_id'];
-$profilkepek = $db->query($query);
-if ($db->errno) {
-    die($db->error);
-}
-
 
 $rights = array();
 $c = 0;
@@ -67,6 +60,16 @@ if (isset($_POST['uploadSubmit'])) {
         }
     }
 }
+
+// Profilképek:
+if (isset($_SESSION['profil_id'])) {
+    $query = "SELECT * FROM `profilkepek` WHERE profil_id=" . $_SESSION['profil_id'];
+    $profilkepek = $db->query($query);
+    if ($db->errno) {
+        die($db->error);
+    }
+}
+
 
 // users form feldolgozása:
 if (isset($_POST['profilokSubmit'])) {
@@ -134,6 +137,8 @@ if (isset($_POST['profilokSubmit'])) {
     }
 
     $_SESSION['masg'] = 'Profil adatok rögzítve.';
+    $profilkepek = $db->query("SELECT * FROM profilkepek WHERE profil_id=" . $_SESSION['profil_id'])->fetch_assoc();
+    $_SESSION['filenev'] = $profilkepek['filenev'];
     $profil = $db->query("SELECT * FROM profilok WHERE user_id=" . $_SESSION['user_id'])->fetch_assoc();
     $_SESSION['profil_id'] = $profil['id'];
     $_SESSION['eKor'] = $profil['erdeklodesi_kor'];
@@ -152,7 +157,7 @@ if (isset($_POST['profilDelete'])) {
         die($db->error);
     }
 
-    $_SESSION['masg'] = 'Profil adatok rögzítve.';
+    
     $profil = $db->query("SELECT id FROM profilok WHERE user_id=" . $_SESSION['user_id'])->fetch_assoc();
     $_SESSION['profil_id'] = $profil['id'];
 
