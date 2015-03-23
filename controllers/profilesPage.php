@@ -78,6 +78,6 @@ if (isset($_POST['pSearchSubmit'])) {
     }
 
 
-    header("Location: $HOST/?q=kereses");
+    header("Location: $HOST/?q=profilok");
     exit;
 }

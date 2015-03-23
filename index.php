@@ -17,13 +17,9 @@ switch ($page){
         include('controllers/frontPage.php');
         include('views/frontPage.php');
         break;
-    case 'bemutatkozas';
-        include('controllers/introductionPage.php');
-        include('views/introductionPage.php');
-        break;
-    case 'kereses';
-        include('controllers/keresesPage.php');
-        include('views/keresesPage.php');
+    case 'profilok';
+        include('controllers/profilesPage.php');
+        include('views/profilesPage.php');
         break;
     case 'regisztracio';
         include('controllers/registrationPage.php');

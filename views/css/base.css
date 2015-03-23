@@ -27,7 +27,7 @@ body {
 .news {
     margin-bottom: 15px;
 }
-.news .title {
+.news .pname {
     border-bottom: 1px solid #555;
     color: #555;
     font-weight: bold;

@@ -2,15 +2,7 @@
 
 $pageTitle = "Kapcsolat";
 
-// Oldal tartalmának betültése adatbázisból:
-$query = "SELECT * FROM  `pages` WHERE `id`='kapcsolat'";
-$result = $db->query($query);
-if ($db->errno) {
-    die($db->error);
-}
 
-// Kiszedem az eredményből az 1db sort:
-$page = $result->fetch_array();
 
 // Üzenetküldés feldolgozása:
 if(isset($_POST['contactSubmit'])) {

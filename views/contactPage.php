@@ -2,10 +2,8 @@
 
 <div id="content" class="row">
     <div class="col-md-12">
-        <h2><?php echo $page['title']; ?></h2>
-
-        <?php echo $page['text']; ?>
-
+        <h2>Telefon:</h2>
+        25 46 537
         <h3>Üzenetküldés:</h3>    
         <form name="contactForm" method="post">
             <label>Név:</label>

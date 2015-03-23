@@ -125,20 +125,34 @@ if (isset($_POST['profilokSubmit'])) {
         $eKor .= 'zenék';
     }
     // ...
+    
+    
+    
     // db-be írás:
     $query = "INSERT INTO profilok (user_id, nem, szuletesi_datum, registracio_datum, megye, bemutatkozas, erdeklodesi_kor) VALUES "
-            . "('$userID', '$nem', '$szuletesiDatum', '$registracioDatum','$profilMegye', '$profilBemutatkozas', '$eKor');";
-
-
-
+            . "('$userID', '$nem', '$szuletesiDatum', '$registracioDatum','$profilMegye', '$profilBemutatkozas', '$eKor')";
     $result = $db->query($query);
     if ($db->errno) {
         die($db->error);
     }
-
+    
+    if($_SESSION['rights']==4){
+        $query = "UPDATE users SET rights=3 WHERE id=".$_SESSION['user_id'];
+        $result = $db->query($query);
+        if ($db->errno) {
+            die($db->error);
+        }
+    }
+    
     $_SESSION['masg'] = 'Profil adatok rögzítve.';
-    $profilkepek = $db->query("SELECT * FROM profilkepek WHERE profil_id=" . $_SESSION['profil_id'])->fetch_assoc();
-    $_SESSION['filenev'] = $profilkepek['filenev'];
+    
+    $result = $db->query("SELECT * FROM profilkepek WHERE profil_id=" . $_SESSION['profil_id']);
+    if (is_object($result)) {
+        $profilkepek = $result->fetch_assoc();
+        $_SESSION['filenev'] = $profilkepek['filenev'];
+    }
+    $uData = $db->query("SELECT * FROM users WHERE id=" . $_SESSION['user_id'])->fetch_assoc();
+    $_SESSION['rights'] = $uData['rights'];
     $profil = $db->query("SELECT * FROM profilok WHERE user_id=" . $_SESSION['user_id'])->fetch_assoc();
     $_SESSION['profil_id'] = $profil['id'];
     $_SESSION['eKor'] = $profil['erdeklodesi_kor'];
@@ -147,8 +161,6 @@ if (isset($_POST['profilokSubmit'])) {
     header("Location: $HOST/?q=profil");
 }
 if (isset($_POST['profilDelete'])) {
-
-
 
     // db-ből törlés:
     $query = "DELETE FROM profilok WHERE user_id=" . $_SESSION['user_id'];
