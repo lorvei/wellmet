@@ -17,9 +17,10 @@ $talal = array();
 $c = 0;
 while ($profilok = $result->fetch_array()) {
     $talal[$c]['uname'] = $profilok['uname'];
-    $talal[$c]['erdeklodesi_kor'] = $profilok['erdeklodesi_kor'];
+    $talal[$c]['szuletesiDatum'] = $profilok['szuletesi_datum'];
     $talal[$c]['nem'] = $profilok['nem'];
     $talal[$c]['megye'] = $profilok['megye'];
+    $talal[$c]['id'] = $profilok['id'];
 
     $query = "SELECT * FROM `profilkepek` WHERE `profil_id`=" . $profilok['id'];
     $talal[$c]['profilkep'] = $db->query($query)->fetch_array();
@@ -59,14 +60,16 @@ if (isset($_POST['pSearchSubmit'])) {
     if ($db->errno) {
         die($db->error);
     }
-
+    
+    //profilok kiírása
     $_SESSION['sresult'] = array();
     $c = 0;
     while ($profilok = $found->fetch_array()) {
         $_SESSION['sresult'][$c]['uname'] = $profilok['uname'];
-        $_SESSION['sresult'][$c]['erdeklodesi_kor'] = $profilok['erdeklodesi_kor'];
+        $_SESSION['sresult'][$c]['szuletesiDatum'] = $profilok['szuletesi_datum'];
         $_SESSION['sresult'][$c]['nem'] = $profilok['nem'];
         $_SESSION['sresult'][$c]['megye'] = $profilok['megye'];
+        $_SESSION['sresult'][$c]['id'] = $profilok['id'];
 
         $query = "SELECT * FROM `profilkepek` WHERE `profil_id`=" . $profilok['id'];
         $_SESSION['sresult'][$c]['profilkep'] = $db->query($query)->fetch_array();

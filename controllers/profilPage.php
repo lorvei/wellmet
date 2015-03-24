@@ -163,16 +163,30 @@ if (isset($_POST['profilokSubmit'])) {
 if (isset($_POST['profilDelete'])) {
 
     // db-ből törlés:
+    $query = "DELETE FROM profilkepek WHERE profil_id=" . $_SESSION['profil_id'];
+    $result = $db->query($query);
+    if ($db->errno) {
+        die($db->error);
+    }
+    
     $query = "DELETE FROM profilok WHERE user_id=" . $_SESSION['user_id'];
     $result = $db->query($query);
     if ($db->errno) {
         die($db->error);
     }
+    if($_SESSION['rights']==3){
+        $query = "UPDATE users SET rights=4 WHERE id=".$_SESSION['user_id'];
+        $result = $db->query($query);
+        if ($db->errno) {
+            die($db->error);
+        }
+    }
 
-    
+    $uData = $db->query("SELECT * FROM users WHERE id=" . $_SESSION['user_id'])->fetch_assoc();
+    $_SESSION['rights'] = $uData['rights'];
     $profil = $db->query("SELECT id FROM profilok WHERE user_id=" . $_SESSION['user_id'])->fetch_assoc();
     $_SESSION['profil_id'] = $profil['id'];
-
+    
     header("Location: $HOST/?q=profil");
     exit;
 }

@@ -19,14 +19,20 @@ while ($uData = $result->fetch_array()) {
 
 // users form feldolgozása:
 if (isset($_POST['usersSubmit'])) {
-  
+    
 	$userName = $_POST['uname'];
-	$userPass = crypt($_POST['upass']);
+	$userPass = (!empty($_POST['upass'])) ? crypt($_POST['upass']) : '';
 	$userRealName = $_POST['name'];
 	$userEmail = $_POST['email'];
 	//$userRights = $_POST['rights'];
         $userRights = 4;    // Alap érték: Felhasználó
 	$userActive = 1;    //Alap érték: Aktív
+        
+        $error=false;
+	if(empty($userName) || empty($userPass) || empty($userRealName) || empty($userEmail)) $error=true;
+        if($error){
+            $_SESSION['msg'] = 'Hiányzó adat, <a href="?q=profilok">próbáld újra!</a>';
+        }else{
         
 	// db-be írás:
 	$query = "INSERT INTO users (uname, upass, name, email, rights, active) VALUES "
@@ -37,7 +43,7 @@ if (isset($_POST['usersSubmit'])) {
 	}
 	
 	$_SESSION['msg'] = 'Sikeres regisztráció.';
-		
+        }
 	header("Location: $HOST/?q=regisztracio");
 	exit;
 }

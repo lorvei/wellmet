@@ -35,8 +35,39 @@
             echo '</div>';
         }
         ?>
+            
 
     </div>
+    <div class="row profilok">
+                <?php
+                foreach ($talal as $item) {
+                    if ($item['profilkep'] == NULL) {
+                        if ($item['nem'] == 'Nő') {
+                            $profK = 'ppf.jpg" width="150" heigth="150"';
+                        } else {
+                            $profK = 'ppm.jpg" width="150" heigth="150"';
+                        }
+                    } else {
+                        $profK = $item['profilkep']['filenev'] . '" width="150" heigth="150"';
+                    }
+
+                    echo '<div class="col-md-4">';
+
+                    echo '<br><div class="row">';
+                    echo '<div class="col-md-5">';
+                    echo '<img src="profilepictures/' . $profK . '">';
+                    echo '</div>';
+                    echo '<div class="col-md-7">';
+                    echo '<b><div class="uname">' . $item['uname'] . '</div></b>';
+                    echo '<div class="eletkor">' . (date('Y') - explode('-', $item['szuletesiDatum'])[0]) . " éves" . '</div>';
+                    echo '<br><div class="megye">' . $item['megye'] . ' megyéből</div>';
+                    echo '<br><a href="?q=iprofil&iid='. $item['id'] .'">Profil megtekintése</a>';
+                    echo '</div></div>';
+
+                    echo '</div>';
+                }
+                ?>
+            </div>
 </div>
 <?php
 include('includes/footer.php');

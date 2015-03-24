@@ -11,6 +11,9 @@ $page = 'kezdolap';
 if(isset($_GET['q'])){
     $page = $_GET['q'];
 }
+if(isset($_GET['iid'])){
+    $_SESSION['iid'] = $_GET['iid'];
+}
 // Aktuális lap betöltése:
 switch ($page){
     case 'kezdolap';
@@ -32,6 +35,10 @@ switch ($page){
     case 'profil';
         include('controllers/profilPage.php');
         include('views/profilPage.php');
+        break;
+    case 'iprofil';
+        include('controllers/iprofilPage.php');
+        include('views/iprofilPage.php');
         break;
     case 'kijelentkezes';
         session_unset();
