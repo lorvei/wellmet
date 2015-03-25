@@ -17,11 +17,23 @@
         }
         }
         ?>
+        
     </div>
-
-
-
-    <div id="data" class="col-md-10">
+<?php if (isset($_SESSION['logged'])) : ?>
+    <?php if (isset($_SESSION['msgke'])) : ?>
+    <?php print($_SESSION['msgke']); ?>
+    <?php else : ?>
+    <div id="uMsg" class="col-md-6">
+        <form name="msgForm" method="post">
+            <div id="msgArea">
+                <textarea name="uMsg" class="longText" cols="40" rows="4" placeholder="Üzenj ennek a felhasználónak!"></textarea><br>
+            </div>
+            <input type="hidden" name="cimzett" value="<?php echo $profil['user_id'] ?>">
+            <input type="submit" name="msgSubmit">
+        </form>
+    </div>
+    <?php endif; ?>
+    <div id="data" class="col-md-4">
         <br>
         <h2>Adatok</h2>
         <br>
@@ -57,6 +69,44 @@
 
 
     </div>
+    <?php else : ?>
+        <div id="data" class="col-md-10">
+        <br>
+        <h2>Adatok</h2>
+        <br>
+        <label>Email:</label>
+        <br>
+        <?php echo $profil['email']; ?>
+        <br><br>
+        <label>Életkor:</label>
+        <br>
+        <?php echo (date('Y') - explode('-', $profil['szuletesi_datum'])[0]) . " év"; ?>
+        <br><br>
+        <label>Nem:</label>
+        <br>
+        <?php echo $profil['nem']; ?>
+        <br><br>
+        <label>Megye:</label>
+        <br>
+        <?php echo $profil['megye']; ?>
+
+        <?php if ($profil['erdeklodesi_kor'] != NULL) :; ?>
+            <br><br>
+            <label>Érdeklődési körök:</label>
+            <br>
+            <?php echo $profil['erdeklodesi_kor']; ?>
+        <?php else : ?>
+        <?php endif; ?>
+
+        <br><br>   
+        <label>Bemutatkozás:</label>
+        <br>
+        <?php echo $profil['bemutatkozas']; ?>
+
+
+
+    </div>
+    <?php endif; ?>
 </div>
 <?php
 include('includes/footer.php');

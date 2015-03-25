@@ -6,6 +6,7 @@
             <li><a href="?q=profilok">Profilok</a></li>
             <li><a href="?q=kapcsolat">Kapcsolat</a></li>
             <li><a href="?q=profil">Profil</a></li>
+            <li><a href="?q=uzenetek">Üzenetek</a></li>
             <?php else : ?>
             <li><a href="?q=kezdolap">Kezdőlap</a></li>
             <li><a href="?q=profilok">Profilok</a></li>

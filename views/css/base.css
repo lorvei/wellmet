@@ -5,23 +5,38 @@
 
 body {
     margin: 0;
+    background-image: url(../../documents/background/abstract-red.png);
+    background-size: 100% 100%;
+    background-repeat: no-repeat;
+    background-color: red;
 }
 
 #header {
-    background-color: #c194f5;
+    background-image: url(../../documents/background/red-rhombus.jpg); 
+    background-size: 100% 250%;
+    background-repeat: repeat;
     padding: 10px 20px;
-
+    color: white;
+}
+#header a{
+    color: white;
+}
+#header a:hover{
+    color: red;
 }
 #header h1#sitename {
     margin: 0;
 }
-#navigation {
-    background-color: #333333;
+#navigation a {
+    color: white;
+    
+}
+#navigation a:hover{
+    color: red;
 }
 #content {
     padding: 10px 20px;
-    background-color: #ede8be;
-
+    background-color: #ea9c9c;
 }
 
 .news {
@@ -42,7 +57,7 @@ body {
 }
 
 #footer {
-    background-color: #7b0603;
+    background-color: none;
     color: white;
     padding: 10px 20px;
     text-align: right;
@@ -52,6 +67,12 @@ body {
     text-align: right;
 }
 #data {
+    text-align: right;
+}
+#msgArea{
+    text-align: right;
+}
+#uMsg {
     text-align: right;
 }
 #t1 {

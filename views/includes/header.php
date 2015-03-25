@@ -70,8 +70,11 @@
 
     </head>
     <body>
+        
         <div class="container">
             <div id="header" class="row">
+                <div class="col-md-12">
+            <div class="row">
                 <div class="col-md-6">
                     <h1 id="sitename">Wellmet</h1>
                 </div>
@@ -93,6 +96,7 @@
                         </form>
                     <?php endif; ?>
                 </div>
-
+                
             </div>
             <?php include('navigation.php'); ?>
+                </div></div>

@@ -40,6 +40,14 @@ switch ($page){
         include('controllers/iprofilPage.php');
         include('views/iprofilPage.php');
         break;
+    case 'uzenetek';
+        include('controllers/messagePage.php');
+        include('views/messagePage.php');
+        break;
+    case 'backMessage';
+        include('controllers/backMessagePage.php');
+        include('views/backMessagePage.php');
+        break;
     case 'kijelentkezes';
         session_unset();
         include('controllers/frontPage.php');

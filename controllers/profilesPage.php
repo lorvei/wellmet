@@ -1,6 +1,6 @@
 <?php
 
-$pageTitle = "Keresés";
+$pageTitle = "Profilok";
 
 //ellen nem
 $where = (isset($_SESSION['nem'])) ? "WHERE nem<>'" . $_SESSION['nem'] . "'" : "";
