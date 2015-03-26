@@ -4,17 +4,11 @@
 
 	<?php if (isset($_SESSION['logged'])) : ?>
 	
-	<p>Üdv az admin oldalon!</p>
+	<p>Üdv az admin oldalon, <?php echo $_SESSION['name']; ?>!</p>
 	
 	<?php else : ?>
 	
 	<h2>Bejelentkezés</h2>
-        
-        <style>
-        table, th, td {
-            border: 1px solid black;
-        }
-    </style>
   <form name="loginForm" method="post">
     <label>Név:</label>
     <br>

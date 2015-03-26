@@ -2,6 +2,12 @@
 
 <div id="content" class="row">
     <div class="col-md-12">
+        <style>
+            table, tr, td{
+                min-height: 250px;
+                padding: 5px;
+            }
+        </style>
         <h2><?php echo $pageTitle; ?></h2>
         
         
@@ -53,17 +59,19 @@
 
                     echo '<div class="col-md-4">';
 
-                    echo '<br><div class="row">';
-                    echo '<div class="col-md-5">';
+                    echo '<table>';
+                    echo '<br>';
+                    echo '<tr><td>';
                     echo '<img src="profilepictures/' . $profK . '">';
                     echo '</div>';
-                    echo '<div class="col-md-7">';
+                    echo '</td><td>';
                     echo '<b><div class="uname">' . $item['uname'] . '</div></b>';
                     echo '<div class="eletkor">' . (date('Y') - explode('-', $item['szuletesiDatum'])[0]) . " éves" . '</div>';
                     echo '<br><div class="megye">' . $item['megye'] . ' megyéből</div>';
-                    echo '<br><a href="?q=iprofil&iid='. $item['id'] .'">Profil megtekintése</a>';
-                    echo '</div></div>';
+                    echo '<br><a href="?q=iprofil&iid=' . $item['id'] . '">Profil megtekintése</a>';
+                    echo '</td>';
 
+                    echo '</table>';
                     echo '</div>';
                 }
                 ?>

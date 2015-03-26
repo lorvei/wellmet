@@ -49,10 +49,9 @@ if (isset($_POST['uploadSubmit'])) {
         $_SESSION['mesg'] = "Fájl feltöltve.";
 
         $profId = $_SESSION['profil_id'];
-        $kepLeir = 'leiras';
 
-        $query = "INSERT INTO profilkepek (profil_id, filenev, leiras) VALUES "
-                . "($profId, '$file_name', '$kepLeir')";
+        $query = "INSERT INTO profilkepek (profil_id, filenev) VALUES "
+                . "($profId, '$file_name')";
 
         $db->query($query);
         if ($db->errno) {

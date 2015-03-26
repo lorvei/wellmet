@@ -2,6 +2,12 @@
 
 <div id="content" class="row">
     <div class="col-md-12">
+        <style>
+            table, tr, td{
+                min-height: 250px;
+                padding: 5px;
+            }
+        </style>
         <h2><?php echo $pageTitle; ?></h2>
 
         <?php if (isset($_SESSION['logged'])) : ?>
@@ -16,7 +22,7 @@
 
                 <?php
                 if (!empty($_SESSION['sresult'])) {
-                    foreach ($talal as $item) {
+                    foreach ($_SESSION['sresult'] as $item) {
                         if ($item['profilkep'] == NULL) {
                             if ($item['nem'] == 'Nő') {
                                 $profK = 'ppf.jpg" width="150" heigth="150"';
@@ -29,17 +35,19 @@
 
                         echo '<div class="col-md-4">';
 
-                        echo '<br><div class="row">';
-                        echo '<div class="col-md-5">';
+                        echo '<table>';
+                        echo '<br>';
+                        echo '<tr><td>';
                         echo '<img src="profilepictures/' . $profK . '">';
                         echo '</div>';
-                        echo '<div class="col-md-7">';
+                        echo '</td><td>';
                         echo '<b><div class="uname">' . $item['uname'] . '</div></b>';
                         echo '<div class="eletkor">' . (date('Y') - explode('-', $item['szuletesiDatum'])[0]) . " éves" . '</div>';
                         echo '<br><div class="megye">' . $item['megye'] . ' megyéből</div>';
                         echo '<br><a href="?q=iprofil&iid=' . $item['id'] . '">Profil megtekintése</a>';
-                        echo '</div></div>';
+                        echo '</td>';
 
+                        echo '</table>';
                         echo '</div>';
                     }
                 } else {
@@ -57,17 +65,12 @@
                     <br>
 
                     <label>Felhasználónév:</label>
-                    <br>
                     <input type="text" name="uname" class="shortText">
-                    <br>
 
                     <label>Érdeklődési kör:</label>
-                    <br>
                     <input type="text" name="erdeklodesi_kor" class="shortText">
-                    <br>
 
                     <label>Kor:</label>
-                    <br>
                     <select name="korTol">
                         <option value="">tól</option>
                         <?php
@@ -87,10 +90,8 @@
                         ?>
 
                     </select>
-                    <br>
 
                     <label>Megye:</label>
-                    <br>
                     <select name="megye">
                         <option value="">Válassz</option>
                         <option value="Bács-Kiskun">Bács-Kiskun</option>
@@ -113,74 +114,77 @@
                         <option value="Veszprém">Veszprém</option>
                         <option value="Zala">Zala</option>
                     </select>    
-                    <br>
-                    <input type="submit" name="pSearchSubmit" value="Keresés">
+                    <input type="submit" name="pSearchSubmit" value="Szűrés">
                     <br>
                 </form>
 
-                <div class="row profilok">
-                    <?php
-                    foreach ($talal as $item) {
-                        if ($item['profilkep'] == NULL) {
-                            if ($item['nem'] == 'Nő') {
-                                $profK = 'ppf.jpg" width="150" heigth="150"';
-                            } else {
-                                $profK = 'ppm.jpg" width="150" heigth="150"';
-                            }
+
+                <?php
+                foreach ($talal as $item) {
+                    if ($item['profilkep'] == NULL) {
+                        if ($item['nem'] == 'Nő') {
+                            $profK = 'ppf.jpg" width="150" heigth="150"';
                         } else {
-                            $profK = $item['profilkep']['filenev'] . '" width="150" heigth="150"';
+                            $profK = 'ppm.jpg" width="150" heigth="150"';
                         }
-
-                        echo '<div class="col-md-4">';
-
-                        echo '<br><div class="row">';
-                        echo '<div class="col-md-5">';
-                        echo '<img src="profilepictures/' . $profK . '">';
-                        echo '</div>';
-                        echo '<div class="col-md-7">';
-                        echo '<b><div class="uname">' . $item['uname'] . '</div></b>';
-                        echo '<div class="eletkor">' . (date('Y') - explode('-', $item['szuletesiDatum'])[0]) . " éves" . '</div>';
-                        echo '<br><div class="megye">' . $item['megye'] . ' megyéből</div>';
-                        echo '<br><a href="?q=iprofil&iid=' . $item['id'] . '">Profil megtekintése</a>';
-                        echo '</div></div>';
-
-                        echo '</div>';
+                    } else {
+                        $profK = $item['profilkep']['filenev'] . '" width="150" heigth="150"';
                     }
-                    ?>
-                </div>
+
+                    echo '<div class="col-md-4">';
+
+                    echo '<table>';
+                    echo '<br>';
+                    echo '<tr><td>';
+                    echo '<img src="profilepictures/' . $profK . '">';
+                    echo '</div>';
+                    echo '</td><td>';
+                    echo '<b><div class="uname">' . $item['uname'] . '</div></b>';
+                    echo '<div class="eletkor">' . (date('Y') - explode('-', $item['szuletesiDatum'])[0]) . " éves" . '</div>';
+                    echo '<br><div class="megye">' . $item['megye'] . ' megyéből</div>';
+                    echo '<br><a href="?q=iprofil&iid=' . $item['id'] . '">Profil megtekintése</a>';
+                    echo '</td>';
+
+                    echo '</table>';
+                    echo '</div>';
+                }
+                ?>
+
 
             <?php endif; ?>
         <?php else : ?>
-            <div class="row profilok">
-                <?php
-                foreach ($talal as $item) {
-                        if ($item['profilkep'] == NULL) {
-                            if ($item['nem'] == 'Nő') {
-                                $profK = 'ppf.jpg" width="150" heigth="150"';
-                            } else {
-                                $profK = 'ppm.jpg" width="150" heigth="150"';
-                            }
-                        } else {
-                            $profK = $item['profilkep']['filenev'] . '" width="150" heigth="150"';
-                        }
 
-                        echo '<div class="col-md-4">';
-
-                        echo '<br><div class="row">';
-                        echo '<div class="col-md-5">';
-                        echo '<img src="profilepictures/' . $profK . '">';
-                        echo '</div>';
-                        echo '<div class="col-md-7">';
-                        echo '<b><div class="uname">' . $item['uname'] . '</div></b>';
-                        echo '<div class="eletkor">' . (date('Y') - explode('-', $item['szuletesiDatum'])[0]) . " éves" . '</div>';
-                        echo '<br><div class="megye">' . $item['megye'] . ' megyéből</div>';
-                        echo '<br><a href="?q=iprofil&iid=' . $item['id'] . '">Profil megtekintése</a>';
-                        echo '</div></div>';
-
-                        echo '</div>';
+            <?php
+            foreach ($talal as $item) {
+                if ($item['profilkep'] == NULL) {
+                    if ($item['nem'] == 'Nő') {
+                        $profK = 'ppf.jpg" width="150" heigth="150"';
+                    } else {
+                        $profK = 'ppm.jpg" width="150" heigth="150"';
                     }
-                ?>
-            </div>
+                } else {
+                    $profK = $item['profilkep']['filenev'] . '" width="150" heigth="150"';
+                }
+
+                echo '<div class="col-md-4">';
+
+                echo '<table>';
+                echo '<br>';
+                echo '<tr><td>';
+                echo '<img src="profilepictures/' . $profK . '">';
+                echo '</div>';
+                echo '</td><td>';
+                echo '<b><div class="uname">' . $item['uname'] . '</div></b>';
+                echo '<div class="eletkor">' . (date('Y') - explode('-', $item['szuletesiDatum'])[0]) . " éves" . '</div>';
+                echo '<br><div class="megye">' . $item['megye'] . ' megyéből</div>';
+                echo '<br><a href="?q=iprofil&iid=' . $item['id'] . '">Profil megtekintése</a>';
+                echo '</td>';
+
+                echo '</table>';
+                echo '</div>';
+            }
+            ?>
+
         <?php endif; ?>
     </div>
 </div>

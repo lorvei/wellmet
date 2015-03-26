@@ -33,16 +33,16 @@
             $_SESSION['name'] = $uData['name'];
             $_SESSION['rights'] = $uData['rights'];
             $_SESSION['eMail'] = $uData['email'];
-            $profil = $db->query("SELECT * FROM profilok WHERE user_id=".$uData['id'])->fetch_assoc();
+            $profil = $db->query("SELECT * FROM profilok WHERE user_id=" . $uData['id'])->fetch_assoc();
             $_SESSION['szuletesiDatum'] = $profil['szuletesi_datum'];
             $_SESSION['profil_id'] = $profil['id'];
             $_SESSION['bemutatkozas'] = $profil['bemutatkozas'];
             $_SESSION['eKor'] = $profil['erdeklodesi_kor'];
             $_SESSION['megye'] = $profil['megye'];
             $_SESSION['nem'] = $profil['nem'];
-            
-            if ($profil['id']!=NULL) {
-                $profilkepek = $db->query("SELECT filenev FROM profilkepek WHERE profil_id=".$profil['id'])->fetch_assoc();
+
+            if ($profil['id'] != NULL) {
+                $profilkepek = $db->query("SELECT filenev FROM profilkepek WHERE profil_id=" . $profil['id'])->fetch_assoc();
                 $_SESSION['fileNev'] = $profilkepek['filenev'];
             }
         }
@@ -70,33 +70,33 @@
 
     </head>
     <body>
-        
+
         <div class="container">
             <div id="header" class="row">
                 <div class="col-md-12">
-            <div class="row">
-                <div class="col-md-6">
-                    <h1 id="sitename">Wellmet</h1>
-                </div>
-                <div class="col-md-6" id="login-block">
-                    <?php if (isset($_SESSION['logged'])) : ?>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <h1 id="sitename">Wellmet</h1>
+                        </div>
+                        <div class="col-md-6" id="login-block">
+                            <?php if (isset($_SESSION['logged'])) : ?>
 
-                        <p>Üdv az oldalon, <?php echo $_SESSION['name']; ?>! |
-                            <a role="presentation"><a href="?q=kijelentkezes">Kijelentkezés</a></p>
+                                <p>Üdv az oldalon, <?php echo $_SESSION['name']; ?>! |
+                                    <a role="presentation"><a href="?q=kijelentkezes">Kijelentkezés</a></p>
 
 
-                    <?php else : ?>
-                        <form name="loginForm" method="post" class="form-inline">
-                            <input type="text" name="uName" class="form-control input-sm" placeholder="Név">
-                            <input type="password" name="uPass" class="form-control input-sm" placeholder="Jelszó">
-                            <input type="submit" name="loginSubmit" value="Belépés" class="btn btn-default btn-sm">
-                            <br>
-                            <a role="presentration"><a href="?q=regisztracio">Regisztráció</a>
+                            <?php else : ?>
+                                <form name="loginForm" method="post" class="form-inline">
+                                    <input type="text" name="uName" class="form-control input-sm" placeholder="Név">
+                                    <input type="password" name="uPass" class="form-control input-sm" placeholder="Jelszó">
+                                    <input type="submit" name="loginSubmit" value="Belépés" class="btn btn-default btn-sm">
+                                    <br>
+                                    <a role="presentration"><a href="?q=regisztracio">Regisztráció</a>
 
-                        </form>
-                    <?php endif; ?>
-                </div>
-                
-            </div>
-            <?php include('navigation.php'); ?>
+                                </form>
+                            <?php endif; ?>
+                        </div>
+
+                    </div>
+                    <?php include('navigation.php'); ?>
                 </div></div>

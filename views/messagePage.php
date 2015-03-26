@@ -16,27 +16,7 @@
         }
         ?>
         
-        <?php /*    <div class="row uzenetek">
-                <?php
-                foreach ($tal as $item) {
-                        
-                        echo '<div class="col-md-4">';
-                        echo 'asd';
-                        echo '<br><div class="row">';
-                        echo '<div class="col-md-5">';
-                        echo '</div>';
-                        echo '<div class="col-md-7">';
-                        echo '<b><div class="felad">' . $item['felad'] . '</div></b>';
-                        echo '<div class="cim">' . $item['cim'] . '</div>';
-                        echo '<br><div class="ido">' . $item['ido'] . '</div>';
-                        echo '<br><div class="uzi">' . $item['uzi'] . '</div>';
-                        echo '</div></div>';
-
-                        echo '</div>';
-                    }
-                ?>
-            </div>
-        */?>
+        
     </div>
 </div>
 <?php

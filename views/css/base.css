@@ -9,6 +9,7 @@ body {
     background-size: 100% 100%;
     background-repeat: no-repeat;
     background-color: red;
+    
 }
 
 #header {
@@ -34,11 +35,33 @@ body {
 #navigation a:hover{
     color: red;
 }
+
 #content {
     padding: 10px 20px;
     background-color: #ea9c9c;
 }
-
+#content a {
+    color: red;
+}
+#content a:hover {
+    color: black;
+}
+#uzenetek {
+    
+}
+.uzenetek .felad {
+    border-bottom: 1px solid #555;
+    color: #555;
+    font-weight: bold;
+    font-size: 1.3em;
+}
+.uzenetek .uzi {
+    margin: 5px 0;
+}
+.uzenetek .ido {
+    text-align: right;
+    font-style: italic;
+}
 .news {
     margin-bottom: 15px;
 }

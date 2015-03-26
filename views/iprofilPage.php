@@ -19,10 +19,11 @@
         ?>
         
     </div>
-<?php if (isset($_SESSION['logged'])) : ?>
-    <?php if (isset($_SESSION['msgke'])) : ?>
-    <?php print($_SESSION['msgke']); ?>
-    <?php else : ?>
+<?php if (isset($_SESSION['logged'])) : 
+    if (isset($_SESSION['msgke'])) : 
+    print($_SESSION['msgke']);
+    unset($_SESSION['msgke']);
+    else : ?>
     <div id="uMsg" class="col-md-6">
         <form name="msgForm" method="post">
             <div id="msgArea">
